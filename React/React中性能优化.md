@@ -2,6 +2,10 @@
 
 [React进阶—性能优化](https://segmentfault.com/a/1190000008925295)
 
+###React性能优化
+React 使用虚拟 DOM， 避免创建和操作 DOM 节点
+
+当一个组件的 props 或 state 改变，React 会构造一个新的虚拟 DOM 和旧的进行对比来决定真实 DOM 更新的必要性，只有在它们不相等的时候，React 才会使用尽量少的改动更新 DOM。
 
 ### 为什么使用Virtual DOM，直接操作DOM的弊端是什么？
 

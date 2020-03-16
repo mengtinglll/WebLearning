@@ -24,6 +24,7 @@ httpRequest.onreadystatechange = function(){
 
  - 向服务器发送请求
 ```js
+// 三个参数：方法，url，是否异步请求
 httpRequest.open('GET', 'http://www.example.org/some.file', true);
 httpRequest.send();
 ```

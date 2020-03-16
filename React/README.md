@@ -20,7 +20,7 @@ React 会创建一个虚拟 DOM(virtual DOM)。当一个组件中的状态改变
  - React 只关注 View 层，所以可以和其它任何框架(如Backbone.js, Angular.js)一起使用
 
 
-### react生命周期函数
+### react生命周期函数：挂载卸载和更新
 
 一、初始化阶段：
  - getDefaultProps
@@ -261,11 +261,6 @@ window.addEventListener('popstate', e => {
  - Hash 模式无需后端配置，并且兼容性好。History 模式在用户手动输入地址或者刷新页面的时候会发起 URL 请求，后端需要配置 index.html 页面用于匹配不到静态资源的时候
 
 
-### Vue 和 React区别
-改变数据方式不同，Vue 修改状态相比来说要简单许多，React 需要使用 setState 来改变状态，并且使用这个 API 也有一些坑点。
- Vue 的底层使用了依赖追踪，页面更新渲染已经是最优的了，但是 React 还是需要用户手动去优化这方面的问题。
-
-React 需要使用 JSX，Vue 使用了模板语法
 
 
 

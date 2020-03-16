@@ -19,7 +19,7 @@
 
 ## [编写高性能的Javascript](编写高性能的Javascript.md)
 
-## [浏览器渲染](浏览器渲染.md)
+## [浏览器渲染](../0-HTML&浏览器/浏览器渲染.md)
 
 ## [CDN](CDN.md)
 
