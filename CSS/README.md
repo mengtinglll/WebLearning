@@ -9,8 +9,8 @@ Cascading Style Sheet 层叠样式表
 
 盒模型是由： 内容(content)、内边距(padding)、边框(border)、外边距(margin) 组成的。
 
-标准模型的宽高是指的content区宽高；
-IE盒模型的宽高是指的content+padding+border的宽高。
+标准模型的宽高是指的content区宽高，实际元素占空间为模型宽高+padding+border+margin
+IE盒模型的宽高是指的content+padding+border的宽高，实际元素占空间为模型宽高+margin
 
 
 ![W3C盒模型](../img/stadardBox.png)
@@ -19,7 +19,7 @@ IE盒模型的宽高是指的content+padding+border的宽高。
 
 
 ### CSS如何设置这两种盒模型？
-
+默认使用标准盒模型，有些情况下使用怪异盒模型更方便
 标准盒模型：
 ``` 
 box-sizing: content-box;
@@ -34,11 +34,33 @@ box-sizing: border-box;
 [什么是BFC](https://www.cnblogs.com/libin-1/p/7098468.html)
 
 W3C对BFC定义：
-> 浮动元素和绝对定位元素，非块级盒子的块级容器（例如 inline-blocks, table-cells, 和 table-captions），以及overflow值不为“visiable”的块级盒子，都会为他们的内容创建新的BFC（块级格式上下文）。
+> 浮动元素和绝对定位元素，非块级盒子的块级容器（例如 inline-blocks, table-cells, 和 table-captions），
+以及overflow值不为“visiable”的块级盒子，都会为他们的内容创建新的BFC（块级格式上下文）。
 
-BFC(Block formatting context)直译为"块级格式化上下文"。它是一个独立的渲染区域，只有Block-level box参与， 它规定了内部的Block-level Box如何布局，并且与这个区域外部毫不相干。
+BFC(Block formatting context)直译为"块级格式化上下文"。
+它是一个独立的渲染区域，只有Block-level box参与， 它规定了内部的Block-level Box如何布局，
+并且与这个区域外部毫不相干。
 
-BFC作用：
+
+####如何生成BFC：
+（脱离文档流，满足下列的任意一个或多个条件即可）
+1. 根元素，即HTML元素（最大的一个BFC）
+2. float浮动：float值非none
+3. 绝对定位：position的值为absolute或fixed
+4. overflow的值不为visible（默认值。内容不会被修剪，会呈现在元素框之外）
+5. display的值为inline-block、table-cell、table-caption、网格布局、弹性布局
+
+####BFC布局规则：
+1. 内部的Box会在垂直方向，一个接一个地放置。
+2. 属于同一个BFC的两个相邻的Box的margin会发生重叠：
+ - Box垂直方向的距离由margin决定，在一个BFC中，两个相邻的块级盒子的垂直外边距会产生折叠。
+ - 每一个盒子的左外边缘（margin-left）会触碰到容器的左边缘(border-left)
+（对于从右到左的格式来说，则触碰到右边缘）
+3. BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此, 文字环绕效果，设置float
+4. BFC的区域不会与float box重叠！！！
+5. 计算BFC的高度，浮动元素也参与计算！！！（避免父级元素高度塌陷）
+
+####BFC作用：
 1. 利用BFC避免外边距折叠
 2. 清除内部浮动 （撑开高度）
    1. 原理: 触发父div的BFC属性，使下面的子div都处在父div的同一个BFC区域之内
@@ -46,29 +68,15 @@ BFC作用：
 4. 分属于不同的BFC时，可以阻止margin重叠
 5. 多列布局中使用BFC
 
-如何生成BFC：（脱离文档流，满足下列的任意一个或多个条件即可）
-1. 根元素，即HTML元素（最大的一个BFC）
-2. float的值不为none
-3. position的值为absolute或fixed
-4. overflow的值不为visible（默认值。内容不会被修剪，会呈现在元素框之外）
-5. display的值为inline-block、table-cell、table-caption
-
-BFC布局规则：
-1. 内部的Box会在垂直方向，一个接一个地放置。
-2. 属于同一个BFC的两个相邻的Box的margin会发生重叠
-3. BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此, 文字环绕效果，设置float
-4. BFC的区域不会与float box重叠。
-5. 计算BFC的高度，浮动元素也参与计算
-
 
 ### BFC、IFC、GFC 和 FFC
  - BFC（Block formatting contexts）：块级格式上下文
 
- - IFC（Inline formatting contexts）：内联格式上下文
+ - IFC（Inline formatting contexts）：内联格式上下文，高度由其包含行内元素中最高的实际高度计算而来
 
- - GFC（GrideLayout formatting contexts）：网格布局格式化上下文
+ - GFC（GrideLayout formatting contexts）：网格布局格式化上下文，和table类似，但有更丰富的属性
 
- - FFC（Flex formatting contexts）:自适应格式上下文
+ - FFC（Flex formatting contexts）:自适应格式上下文，display:flex 或者 inline-flex（仅火狐和谷歌支持）
 
 
 
@@ -111,15 +119,16 @@ BFC布局规则：
  - 高度塌陷
 
 
-### 清楚浮动
-浮动的元素布局时不会占据父元素的布局空间，即父元素布局时不会管浮动元素，浮动元素有可能超出父元素，从而对其他元素造成影响。
+### 清除浮动
+浮动的元素布局时不会占据父元素的布局空间，
+即父元素布局时不会管浮动元素，浮动元素有可能超出父元素，从而对其他元素造成影响。
 
 方法一：让父元素变为一个BFC。
 父元素 overflow: auto/hidden。 让父元素去关注里面的高度。
 必须定义width或zoom:1，同时不能定义height，使用overflow:auto时，浏览器会自动检查浮动区域的高度
 
 
-方法二： 使用伪元素清楚浮动
+方法二： 使用伪元素清除浮动
 ```css
 .container::after {
   content: " ";
@@ -131,8 +140,58 @@ BFC布局规则：
 ```
 
 
+### 谈谈浮动和清除浮动
+浮动的框可以向左或向右移动，**直到他的外边缘碰到包含框或另一个浮动框的边框为止**。 
+**浮动框脱离文档流**，所以文档的普通流的块框表现得就像浮动框不存在一样。
+浮动的块框会漂浮在文档普通流的块框上。
+
+清除方法：
+1. 父级 div 定义伪类：after 和 zoom (推荐使用，建议定义公共类，以减少 CSS 代码)
+
+```css
+   .clearfloat:after{
+       display:block;
+       clear:both;
+       content:"";
+       visibility:hidden;
+       height:0}
+
+   .clearfloat{zoom:1}
+```
+
+2. 在结尾处添加空 div 标签 clear:both
+```html
+<div class="parent">
+    <div class="left">Left</div>
+    <div class="right">Right</div>
+    <div class="clearfloat"></div>
+</div>
+
+<style>
+    .left {float:left}
+    .clearfloat{clear:both}
+</style>
+```
+3.父级 div 定义 overflow:auto。 同时需要父级指定宽度,BFC
+
+参考链接[几种常用的清除浮动方法](https://www.cnblogs.com/nxl0908/p/7245460.html)
+
+
+
+### 设置元素浮动后，该元素的 display 值会如何变化？
+
+设置元素浮动后，该元素的 display 值自动变成 block
+
+
+
+
+###行内元素 display: inline
+span、字体修饰b/i、sup平方、图片img
+特征：①设置宽高无效②margin仅左右有效，上下无效；padding都有效，会撑大空间③不会自动换行
+
 ### inline-block的间隙
-两个并列的inline-block中间会有一条裂缝，这个的原因是两个标签之间有空格，浏览器把这些空格当成文字中空格，所以这两个块中间多少有间隙。
+两个并列的inline-block中间会有一条裂缝，这个的原因是两个标签之间有空格，
+浏览器把这些空格当成文字中空格，所以这两个块中间多少有间隙。
 
 解决办法：
 1. 删除两个标签间的空格，但是这样html排版不好
@@ -174,7 +233,7 @@ BFC布局规则：
 
 
 
-### 滚动
+### 滚动overflow
  - visible 滚动条隐藏, 文字超出显示
  - hidden  滚动条隐藏, 文字超出不显示
  - scroll  滚动条一直显示，无论文字是否够多
@@ -199,8 +258,9 @@ BFC布局规则：
 
 
 
-### CSS Hack
-在一部分不合法，但是在某些浏览器上生效的写法就叫CSS Hack，一般用来兼容老的浏览器， 缺点是难理解、难维护、易失效
+### CSS Hack 兼容老旧浏览器
+在一部分不合法，但是在某些浏览器上生效的写法就叫CSS Hack，
+一般用来兼容老的浏览器， 缺点是难理解、难维护、易失效
 
 替代方案： 
  - 特征检测
@@ -211,51 +271,6 @@ BFC布局规则：
  - 标准属性写在前面， hack代码写在后面
 
 
-
-### 单行文本溢出显示省略号
-```css
-overflow: hidden;
-text-overflow: ellipsis;
-white-space: no-wrap;
-```
-
-
-
-### 多行文本溢出显示省略号
-```css
-overflow: hidden;
-text-overflow: ellipsis;
-display: -webkit-box;
--webkit-line-clamp: 3;
--webkit-box-orient: vertical;
-```
-
-
-
-### display: none; 与 visibility: hidden; 的区别
-结构：
- - display:none
-   - 会让元素完全从渲染树中消失，渲染的时候不占据任何空间, 不能点击，
- - visibility: hidden
-   - 不会让元素从渲染树消失，渲染元素继续占据空间，只是内容不可见，不能点击 
- - opacity: 0
-   - 不会让元素从渲染树消失，渲染元素继续占据空间，只是内容不可见，可以点击
-
-继承
- - display: none和opacity: 0
-   - 非继承属性，子孙节点消失由于元素从渲染树消失造成，通过修改子孙节点属性无法显示。
- - visibility: hidden
-   - 继承属性，子孙节点消失由于继承了hidden，通过设置visibility: visible;可以让子孙节点显式。
-
-性能
-   - display:none
-     - 修改元素会造成文档回流。读屏器不会读取display: none元素内容，性能消耗较大
-   - visibility:hidden
-     - 修改元素只会造成本元素的重绘,性能消耗较少。读屏器读取visibility: hidden元素内容
-   - opacity: 0
-     - 修改元素会造成重绘，性能消耗较少
-
-相同点： 它们都能让元素不可见、他们都依然可以被 JS 所获取到
 
 
 ### 外边距折叠(collapsing margins)
@@ -278,11 +293,14 @@ display: -webkit-box;
 1. px  绝对单位。传统上一个像素对应于计算机屏幕上的一个点，而对于高清屏则对应更多。
 
 2. %   父元素**宽度**的比例。
-   1. 如果对 html 元素设置 font-size 为百分比值，则是以浏览器默认的字体大小16px为参照计算的（所有浏览器的默认字体大小都为 16px），如62.5%即等于10px（62.5% * 16px = 10px）。
+   1. 如果对 html 元素设置 font-size 为百分比值，则是以浏览器默认的字体大小16px为参照计算的
+   （所有浏览器的默认字体大小都为 16px），如62.5%即等于10px（62.5% * 16px = 10px）。
 
 3. em  相对单位。 不同的属性有不同的参照值。
    1. 对于字体大小属性（font-size）来说，em 的计算方式是相对于父元素的字体大小
-   2. border, width, height, padding, margin, line-height）在这些属性中，使用em单位的计算方式是参照该元素的 font-size，1em 等于该元素设置的字体大小。同理如果该元素没有设置，则一直向父级元素查找，直到找到，如果都没有设置大小，则使用浏览器默认的字体大小。
+   2. border, width, height, padding, margin, line-height）在这些属性中，
+   使用em单位的计算方式是参照该元素的 font-size，1em 等于该元素设置的字体大小。
+   同理如果该元素没有设置，则一直向父级元素查找，直到找到，如果都没有设置大小，则使用浏览器默认的字体大小。
 
 4. rem 是相对于根元素 html 的 font-size 来计算的，所以其参照物是固定的。
    1. 好处：rem 只需要修改 html 的 font-size 值即可达到全部的修改，即所谓的牵一发而动全身。
@@ -349,7 +367,7 @@ display: -webkit-box;
 
 ### CSS 优化、提高性能的方法有哪些？
 - 多个 css 合并，尽量减少 HTTP 请求
-- css 雪碧图
+- css 雪碧图sprite
 - 抽象提取公共样式，减少代码量
 - 选择器优化嵌套，尽量避免层级过深 （用‘>’替换‘ ’）
 - 属性值为 0 时，不加单位
@@ -405,14 +423,14 @@ display: -webkit-box;
 
 
 
-### position 有哪些值？ relative 和 absolute 定位原点是？
+### 定位方式有几种？position 有哪些值？ relative 和 absolute 定位原点是？
 
 - absolute 生成绝对定位的元素，相对于值不为 static 的第一个父元素进行定位。
 - fixed （老 IE 不支持） 生成绝对定位的元素，相对于浏览器窗口进行定位。
-- relative 生成相对定位的元素，相对于其正常位置进行定位。
+- relative 生成相对定位的元素，相对于它在正常流中的默认位置进行偏移
 - static 默认值。没有定位，元素出现在正常的流中（忽略 top, bottom, left, right - z-index 声明）。
 - inherit 规定从父元素继承 position 属性的值
-
+- sticky 粘性定位，接近于relative和fixed的结合体，顶屁股
 
 
 ###  CSS3新特性？
@@ -439,6 +457,12 @@ display: -webkit-box;
   - 位移 transform: translate(20px, 20px);
   - 缩放 transform: scale(.5);
 
+
+###为什么用translate来改变位置而不是通过position定位?
+- translate()是transform的一个值。
+- 改变transform或opacity不会触发浏览器重排重绘，只会触发复合；而改变绝对定位会触发重排重绘
+- transform使浏览器为元素创建一个 GPU 图层，但改变绝对定位会使用到 CPU。因此前者更高效
+- 但translate改变位置时，元素依然会占据其原始空间，绝对定位就不会发生这种情况
 
 
 ### 如何水平居中一个元素？
@@ -467,7 +491,8 @@ display: -webkit-box;
 
 ### li 与 li 之间有看不见的空白间隔是什么原因引起的？有什么解决办法？(也称幽灵字符)
 
-行框的排列会受到中间空白（回车\空格）等的影响，因为空格也属于字符, 这些空白也会被应用样式，占据空间，所以会有间隔，把字符大小设为 0，就没有空格了
+行框的排列会受到中间空白（回车\空格）等的影响，因为空格也属于字符, 这些空白也会被应用样式，占据空间，
+所以会有间隔，把字符大小设为 0，就没有空格了
 
 
 
@@ -489,48 +514,57 @@ display: -webkit-box;
 
 
 
-### 谈谈浮动和清除浮动
-浮动的框可以向左或向右移动，**直到他的外边缘碰到包含框或另一个浮动框的边框为止**。 **浮动框脱离文档流**，所以文档的普通流的块框表现得就像浮动框不存在一样。浮动的块框会漂浮在文档普通流的块框上。
-
-清除方法：
-1. 父级 div 定义伪类：after 和 zoom (推荐使用，建议定义公共类，以减少 CSS 代码)
-
-```css
-   .clearfloat:after{
-       display:block;
-       clear:both;
-       content:"";
-       visibility:hidden;
-       height:0}
-
-   .clearfloat{zoom:1}
-```
-
-2. 在结尾处添加空 div 标签 clear:both
-```html
-<div class="parent">
-    <div class="left">Left</div>
-    <div class="right">Right</div>
-    <div class="clearfloat"></div>
-</div>
-
-<style>
-    .left {float:left}
-    .clearfloat{clear:both}
-</style>
-```
-父级 div 定义 overflow:auto。 同时需要父级指定宽度
-
-参考链接[几种常用的清除浮动方法](https://www.cnblogs.com/nxl0908/p/7245460.html)
-
-
-
 ### box-sizing 常用的属性有哪些？分别有什么作用？
 
 - box-sizing: content-box; // 默认的标准(W3C)盒模型元素效果
 - box-sizing: border-box; // 触发怪异(IE)盒模型元素的效果
 - box-sizing: inherit; // 继承父元素 box-sizing 属性的值
 
+
+### 单行文本溢出显示省略号
+```css
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: no-wrap;
+```
+或者用js切字符串
+
+
+### 多行文本溢出显示省略号
+```css
+overflow: hidden;
+text-overflow: ellipsis;
+display: -webkit-box; //重点
+-webkit-line-clamp: 3;
+-webkit-box-orient: vertical;
+```
+
+
+
+### display: none; visibility: hidden; opacity: 0;的区别
+结构：
+ - display:none
+   - 会让元素完全从渲染树中消失，渲染的时候不占据任何空间, 不能点击，
+ - visibility: hidden
+   - 不会让元素从渲染树消失，渲染元素继续占据空间，只是内容不可见，不能点击 
+ - opacity: 0
+   - 不会让元素从渲染树消失，渲染元素继续占据空间，只是内容不可见，可以点击
+
+继承
+ - display: none和opacity: 0
+   - 非继承属性，子孙节点消失由于元素从渲染树消失造成，通过修改子孙节点属性无法显示。
+ - visibility: hidden
+   - 继承属性，子孙节点消失由于继承了hidden，通过设置visibility: visible;可以让子孙节点显式。
+
+性能
+   - display:none
+     - 修改元素会造成文档回流。读屏器不会读取display: none元素内容，性能消耗较大
+   - visibility:hidden
+     - 修改元素只会造成本元素的重绘,性能消耗较少。读屏器读取visibility: hidden元素内容
+   - opacity: 0
+     - 修改元素会造成重绘，性能消耗较少
+
+相同点： 它们都能让元素不可见、他们都依然可以被 JS 所获取到
 
 
 ### 请列举几种隐藏元素的方法
@@ -543,7 +577,7 @@ display: -webkit-box;
 - \<div hidden="hidden"\> HTML5 属性,效果和 display:none;相同，但这个属性用于记录一个元素的状态
 - height: 0; 将元素高度设为 0 ，并消除边框
 - filter: blur(0); CSS3 属性，将一个元素的模糊度设置为 0
-
+- z-index:-9999;
 
 
 ### rgba() 和 opacity 的透明效果有什么不同？
@@ -577,9 +611,10 @@ link > visited > hover > active
 
 
 
-### 伪元素和伪类的区别和作用？
+### 伪元素和伪类、伪类和伪元素的区别和作用？
 
-伪元素:在内容元素的前后插入额外的元素或样式，但是这些元素实际上并不在文档中生成。它们只在外部显示可见，但不会在文档的源代码中找到它们，因此，称为“伪”元素。例如：
+伪元素:在内容元素的前后插入额外的元素或样式，但是这些元素实际上并不在文档中生成。
+它们只在外部显示可见，但不会在文档的源代码中找到它们，因此，称为“伪”元素。例如：
 
 ```css
 p::before {content:"第一章：";}
@@ -607,15 +642,11 @@ p:first-child {color: red}
 
 
 
-### 设置元素浮动后，该元素的 display 值会如何变化？
-
-设置元素浮动后，该元素的 display 值自动变成 block
-
-
-
 ### 请解释 CSS sprites，以及你要如何在页面或网站中实现它
 
-- CSS Sprites 其实就是把网页中一些背景图片整合到一张图片文件中，再利用 CSS 的“background-image”，“background- repeat”，“background-position”的组合进行背景定位，background-position 可以用数字能精确的定位出背景图片的位置。
+- CSS Sprites 其实就是把网页中一些背景图片整合到一张图片文件中，
+再利用 CSS 的“background-image”，“background- repeat”，“background-position”的组合进行背景定位，
+background-position 可以用数字能精确的定位出背景图片的位置。
 - CSS Sprites 为一些大型的网站节约了带宽，让提高了用户的加载速度和用户体验，不需要加载更多的图片。
 
 
@@ -628,7 +659,8 @@ p:first-child {color: red}
 
 
 ### margin叠加几种情况
-margin叠加的意思是：当两个或者更多的垂直外边距 相遇时，它们将形成一个外边距，这个外边距的高度等于两个发生叠加的外边距中高度较大者。
+margin叠加的意思是：当两个或者更多的垂直外边距 相遇时，它们将形成一个外边距，
+这个外边距的高度等于两个发生叠加的外边距中高度较大者。
 
 1. 当一个元素出现在另一个元素上面时，第一个元素的底边外边距与第二个元素的顶边外边距发生叠加。如图：
 ![叠加](../img/marginSuperposition1.png)
@@ -643,3 +675,21 @@ margin叠加的意思是：当两个或者更多的垂直外边距 相遇时，�
 ![叠加4](../img/marginSuperposition4.png)
 
 以上4种外边距叠加情况**只会发生在普通文档流的垂直方向**。行内框、浮动框、绝对定位框之间的外边距不会发生叠加，同样水平方向也不会发生叠加。
+
+
+### 媒体查询是什么
+- 媒体查询由一个可选的媒体类型和 限制了样式表范围的表达式组成，表达式最终解析为true或false
+- 允许内容的呈现针对一个特定范围的输出设备而进行裁剪，而不必改变内容本身,实现对不同型号的设备而做出对应的响应适配。
+
+
+### 媒体查询的使用
+```
+<style>
+@media (max-width: 600px) {
+  .facet_sidebar {
+    display: none;
+  }
+}
+</style>
+
+```

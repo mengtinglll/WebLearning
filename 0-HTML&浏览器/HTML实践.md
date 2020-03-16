@@ -81,19 +81,3 @@ label 标签来定义表单控制间的关系,当用户选择该标签时，浏�
 
 
 
-### 移动端项目需要注意的4个问题
-
-#### meta中设置viewport
-阻止用户手滑放大或缩小页面，需要在 index.html中添加meta元素,设置viewport。
-```html
-<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-```
-
-###CSS样式统一问题
-我们需要重置页面样式，因为在不同的手机浏览器上，默认的css样式不是统一的。 解决方法：使用reset.css重置所有元素的默认样式
-
-- 一像素边框问题：
-有的手机分辨率比较高，是2倍屏或3倍屏，手机上的浏览器就会把CSS中的1像素值展示为2个或3个物理宽度 解决方法： 添加一个border.css库，将利用**scroll缩放的原理**将边框重置。当我们需要使用一像素边框时只需要在标签上添加对应类名，如设置底部一像素边框就在标签上加入"border-bottom"的class名
-
-- 300毫秒点击延迟问题：
-在移动端开发中，某些机型上使用click事件会延迟300ms才执行，这样影响了用户体验。 解决方法： 引入[fastclick.js](https://www.jianshu.com/p/05b142d84780)。
