@@ -1,3 +1,14 @@
+- [Doctype 作用？标准模式与兼容模式各有什么区别?](#doctype-%e4%bd%9c%e7%94%a8%e6%a0%87%e5%87%86%e6%a8%a1%e5%bc%8f%e4%b8%8e%e5%85%bc%e5%ae%b9%e6%a8%a1%e5%bc%8f%e5%90%84%e6%9c%89%e4%bb%80%e4%b9%88%e5%8c%ba%e5%88%ab)
+- [Doctype文档解析类型](#doctype%e6%96%87%e6%a1%a3%e8%a7%a3%e6%9e%90%e7%b1%bb%e5%9e%8b)
+- [HTML5 的 form 如何关闭自动补全功能？](#html5-%e7%9a%84-form-%e5%a6%82%e4%bd%95%e5%85%b3%e9%97%ad%e8%87%aa%e5%8a%a8%e8%a1%a5%e5%85%a8%e5%8a%9f%e8%83%bd)
+- [iframe 有那些缺点？](#iframe-%e6%9c%89%e9%82%a3%e4%ba%9b%e7%bc%ba%e7%82%b9)
+- [Label 的作用是什么？是怎么用的？](#label-%e7%9a%84%e4%bd%9c%e7%94%a8%e6%98%af%e4%bb%80%e4%b9%88%e6%98%af%e6%80%8e%e4%b9%88%e7%94%a8%e7%9a%84)
+- [页面可见性（Page Visibility API） 可以有哪些用途？](#%e9%a1%b5%e9%9d%a2%e5%8f%af%e8%a7%81%e6%80%a7page-visibility-api-%e5%8f%af%e4%bb%a5%e6%9c%89%e5%93%aa%e4%ba%9b%e7%94%a8%e9%80%94)
+- [如何在页面上实现一个圆形的可点击区域？](#%e5%a6%82%e4%bd%95%e5%9c%a8%e9%a1%b5%e9%9d%a2%e4%b8%8a%e5%ae%9e%e7%8e%b0%e4%b8%80%e4%b8%aa%e5%9c%86%e5%bd%a2%e7%9a%84%e5%8f%af%e7%82%b9%e5%87%bb%e5%8c%ba%e5%9f%9f)
+- [实现不使用 border 画出 1px 高的线，在不同浏览器的标准模式与怪异模式下都能保持一致的效果。](#%e5%ae%9e%e7%8e%b0%e4%b8%8d%e4%bd%bf%e7%94%a8-border-%e7%94%bb%e5%87%ba-1px-%e9%ab%98%e7%9a%84%e7%ba%bf%e5%9c%a8%e4%b8%8d%e5%90%8c%e6%b5%8f%e8%a7%88%e5%99%a8%e7%9a%84%e6%a0%87%e5%87%86%e6%a8%a1%e5%bc%8f%e4%b8%8e%e6%80%aa%e5%bc%82%e6%a8%a1%e5%bc%8f%e4%b8%8b%e9%83%bd%e8%83%bd%e4%bf%9d%e6%8c%81%e4%b8%80%e8%87%b4%e7%9a%84%e6%95%88%e6%9e%9c)
+- [其他文件链接](#%e5%85%b6%e4%bb%96%e6%96%87%e4%bb%b6%e9%93%be%e6%8e%a5)
+- [厂商定制](#%e5%8e%82%e5%95%86%e5%ae%9a%e5%88%b6)
+
 ### Doctype 作用？标准模式与兼容模式各有什么区别?
 
 DOCTYPE是用来声明文档类型和DTD规范的。
@@ -63,14 +74,14 @@ label 标签来定义表单控制间的关系,当用户选择该标签时，浏�
 
 
 
-#### 其他文件链接
+### 其他文件链接
 
  - CSS 文件：<link rel="stylesheet" type="text/css" href="style.css">
  - JavaScript 文件：<script src=“script.js"></script>
 
 但是为了让页面的样子更早的让用户看到，一般把JS文件放到body的底部
 
-#### 厂商定制
+### 厂商定制
 
 同样分享页面到QQ的聊天窗口，有些页面直接就是一个链接，但是有些页面有标题，图片，还有文字介绍。为什么区别这么明显呢？其实就是看有没有设置下面这三个内容
 ```html

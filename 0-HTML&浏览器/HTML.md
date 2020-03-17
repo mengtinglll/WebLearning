@@ -1,3 +1,24 @@
+- [HTML、XHTML、XML有什么区别](#htmlxhtmlxml%e6%9c%89%e4%bb%80%e4%b9%88%e5%8c%ba%e5%88%ab)
+- [HTML5变化](#html5%e5%8f%98%e5%8c%96)
+- [简述一下你对 HTML 语义化的理解？](#%e7%ae%80%e8%bf%b0%e4%b8%80%e4%b8%8b%e4%bd%a0%e5%af%b9-html-%e8%af%ad%e4%b9%89%e5%8c%96%e7%9a%84%e7%90%86%e8%a7%a3)
+- [网页基本信息](#%e7%bd%91%e9%a1%b5%e5%9f%ba%e6%9c%ac%e4%bf%a1%e6%81%af)
+- [HTML 全局属性](#html-%e5%85%a8%e5%b1%80%e5%b1%9e%e6%80%a7)
+- [行内元素有哪些？块级元素有哪些？ 空(void)元素有那些？](#%e8%a1%8c%e5%86%85%e5%85%83%e7%b4%a0%e6%9c%89%e5%93%aa%e4%ba%9b%e5%9d%97%e7%ba%a7%e5%85%83%e7%b4%a0%e6%9c%89%e5%93%aa%e4%ba%9b-%e7%a9%bavoid%e5%85%83%e7%b4%a0%e6%9c%89%e9%82%a3%e4%ba%9b)
+- [页面导入样式时，使用 link 和@import 有什么区别？](#%e9%a1%b5%e9%9d%a2%e5%af%bc%e5%85%a5%e6%a0%b7%e5%bc%8f%e6%97%b6%e4%bd%bf%e7%94%a8-link-%e5%92%8cimport-%e6%9c%89%e4%bb%80%e4%b9%88%e5%8c%ba%e5%88%ab)
+- [canvas和svg的区别](#canvas%e5%92%8csvg%e7%9a%84%e5%8c%ba%e5%88%ab)
+- [em 与 i 的区别](#em-%e4%b8%8e-i-%e7%9a%84%e5%8c%ba%e5%88%ab)
+- [src和href的区别](#src%e5%92%8chref%e7%9a%84%e5%8c%ba%e5%88%ab)
+- [img的srcset的作用是什么](#img%e7%9a%84srcset%e7%9a%84%e4%bd%9c%e7%94%a8%e6%98%af%e4%bb%80%e4%b9%88)
+- [html 中 title 属性和 alt 属性的区别？](#html-%e4%b8%ad-title-%e5%b1%9e%e6%80%a7%e5%92%8c-alt-%e5%b1%9e%e6%80%a7%e7%9a%84%e5%8c%ba%e5%88%ab)
+- [script标签中defer和async的区别](#script%e6%a0%87%e7%ad%be%e4%b8%addefer%e5%92%8casync%e7%9a%84%e5%8c%ba%e5%88%ab)
+- [property和attribute的区别](#property%e5%92%8cattribute%e7%9a%84%e5%8c%ba%e5%88%ab)
+- [title 与 h1 的区别、b 与 strong 的区别、i 与 em 的区别？](#title-%e4%b8%8e-h1-%e7%9a%84%e5%8c%ba%e5%88%abb-%e4%b8%8e-strong-%e7%9a%84%e5%8c%ba%e5%88%abi-%e4%b8%8e-em-%e7%9a%84%e5%8c%ba%e5%88%ab)
+- [哪些元素可以自闭合？](#%e5%93%aa%e4%ba%9b%e5%85%83%e7%b4%a0%e5%8f%af%e4%bb%a5%e8%87%aa%e9%97%ad%e5%90%88)
+- [HTML和DOM的关系](#html%e5%92%8cdom%e7%9a%84%e5%85%b3%e7%b3%bb)
+- [form 作用](#form-%e4%bd%9c%e7%94%a8)
+- [另外还有一些关于 title 属性的知识：](#%e5%8f%a6%e5%a4%96%e8%bf%98%e6%9c%89%e4%b8%80%e4%ba%9b%e5%85%b3%e4%ba%8e-title-%e5%b1%9e%e6%80%a7%e7%9a%84%e7%9f%a5%e8%af%86)
+- [head 元素](#head-%e5%85%83%e7%b4%a0)
+  
 ### HTML、XHTML、XML有什么区别
 - HTML(超文本标记语言)
 - XML(可扩展标记语言)：要求严苛，主要用于存储数据和结构，被JSON取代
@@ -31,7 +52,7 @@
  - 使阅读源代码的人对网站更容易将网站分块，便于阅读维护理解。
  
  
-#### 网页基本信息
+### 网页基本信息
 一个网页，首先得有个标题，就跟人有名字一样。除此之外，还可以根据实际需要补充一些基本信息。
  - 文档标题（浏览器标签中显示的文本）：<title>深入了解 head 元素</title>
  - 编码格式：<meta charset="utf-8"> 如果你的页面出现乱码，那一般就是编码格式不对

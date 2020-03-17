@@ -1,3 +1,10 @@
+- [RESTful](#restful)
+  - [理解RESTful](#理解restful)
+    - [资源和URI](#资源和uri)
+    - [统一资源接口](#统一资源接口)
+    - [资源表述](#资源表述)
+    - [资源的链接](#资源的链接)
+    - [状态转移](#状态转移)
 # RESTful
 
 REST (Representational State Transfer)，中文意思是：表述性状态转移。 一组架构约束条件和原则，如果一个架构符合 REST 的约束条件和原则，我们就称它为 RESTful 架构。

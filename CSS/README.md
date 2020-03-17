@@ -1,9 +1,69 @@
-# CSS
+- [CSS选择器](#css%e9%80%89%e6%8b%a9%e5%99%a8)
+- [盒模型](#%e7%9b%92%e6%a8%a1%e5%9e%8b)
+  - [盒模型](#%e7%9b%92%e6%a8%a1%e5%9e%8b-1)
+  - [CSS如何设置这两种盒模型？](#css%e5%a6%82%e4%bd%95%e8%ae%be%e7%bd%ae%e8%bf%99%e4%b8%a4%e7%a7%8d%e7%9b%92%e6%a8%a1%e5%9e%8b)
+- [BFC](#bfc)
+  - [如何生成BFC：](#%e5%a6%82%e4%bd%95%e7%94%9f%e6%88%90bfc)
+  - [BFC布局规则：](#bfc%e5%b8%83%e5%b1%80%e8%a7%84%e5%88%99)
+  - [BFC作用：](#bfc%e4%bd%9c%e7%94%a8)
+  - [BFC、IFC、GFC 和 FFC](#bfcifcgfc-%e5%92%8c-ffc)
+- [float浮动](#float%e6%b5%ae%e5%8a%a8)
+  - [float](#float)
+  - [清除浮动](#%e6%b8%85%e9%99%a4%e6%b5%ae%e5%8a%a8)
+  - [谈谈浮动和清除浮动](#%e8%b0%88%e8%b0%88%e6%b5%ae%e5%8a%a8%e5%92%8c%e6%b8%85%e9%99%a4%e6%b5%ae%e5%8a%a8)
+  - [设置元素浮动后，该元素的 display 值会如何变化？](#%e8%ae%be%e7%bd%ae%e5%85%83%e7%b4%a0%e6%b5%ae%e5%8a%a8%e5%90%8e%e8%af%a5%e5%85%83%e7%b4%a0%e7%9a%84-display-%e5%80%bc%e4%bc%9a%e5%a6%82%e4%bd%95%e5%8f%98%e5%8c%96)
+- [inline行内](#inline%e8%a1%8c%e5%86%85)
+  - [inline-block的间隙](#inline-block%e7%9a%84%e9%97%b4%e9%9a%99)
+  - [你对 line-height 是如何理解的？](#%e4%bd%a0%e5%af%b9-line-height-%e6%98%af%e5%a6%82%e4%bd%95%e7%90%86%e8%a7%a3%e7%9a%84)
+  - [line-height 三种赋值方式有何区别？（带单位、纯数字、百分比）](#line-height-%e4%b8%89%e7%a7%8d%e8%b5%8b%e5%80%bc%e6%96%b9%e5%bc%8f%e6%9c%89%e4%bd%95%e5%8c%ba%e5%88%ab%e5%b8%a6%e5%8d%95%e4%bd%8d%e7%ba%af%e6%95%b0%e5%ad%97%e7%99%be%e5%88%86%e6%af%94)
+- [伪类伪元素](#%e4%bc%aa%e7%b1%bb%e4%bc%aa%e5%85%83%e7%b4%a0)
+  - [伪元素和伪类、伪类和伪元素的区别和作用？](#%e4%bc%aa%e5%85%83%e7%b4%a0%e5%92%8c%e4%bc%aa%e7%b1%bb%e4%bc%aa%e7%b1%bb%e5%92%8c%e4%bc%aa%e5%85%83%e7%b4%a0%e7%9a%84%e5%8c%ba%e5%88%ab%e5%92%8c%e4%bd%9c%e7%94%a8)
+  - [::before 和 :after 中双冒号和单冒号有什么区别？](#before-%e5%92%8c-after-%e4%b8%ad%e5%8f%8c%e5%86%92%e5%8f%b7%e5%92%8c%e5%8d%95%e5%86%92%e5%8f%b7%e6%9c%89%e4%bb%80%e4%b9%88%e5%8c%ba%e5%88%ab)
+  - [a 标签上四个伪类的使用顺序是怎么样的？](#a-%e6%a0%87%e7%ad%be%e4%b8%8a%e5%9b%9b%e4%b8%aa%e4%bc%aa%e7%b1%bb%e7%9a%84%e4%bd%bf%e7%94%a8%e9%a1%ba%e5%ba%8f%e6%98%af%e6%80%8e%e4%b9%88%e6%a0%b7%e7%9a%84)
+- [性能](#%e6%80%a7%e8%83%bd)
+  - [CSS Hack 兼容老旧浏览器](#css-hack-%e5%85%bc%e5%ae%b9%e8%80%81%e6%97%a7%e6%b5%8f%e8%a7%88%e5%99%a8)
+  - [CSS 优化、提高性能的方法有哪些？](#css-%e4%bc%98%e5%8c%96%e6%8f%90%e9%ab%98%e6%80%a7%e8%83%bd%e7%9a%84%e6%96%b9%e6%b3%95%e6%9c%89%e5%93%aa%e4%ba%9b)
+  - [CSS预处理器](#css%e9%a2%84%e5%a4%84%e7%90%86%e5%99%a8)
+  - [CSS3新特性？](#css3%e6%96%b0%e7%89%b9%e6%80%a7)
+- [其他](#%e5%85%b6%e4%bb%96)
+  - [非布局样式](#%e9%9d%9e%e5%b8%83%e5%b1%80%e6%a0%b7%e5%bc%8f)
+  - [行高的构成](#%e8%a1%8c%e9%ab%98%e7%9a%84%e6%9e%84%e6%88%90)
+  - [图片下面有一个缝隙是因为什么](#%e5%9b%be%e7%89%87%e4%b8%8b%e9%9d%a2%e6%9c%89%e4%b8%80%e4%b8%aa%e7%bc%9d%e9%9a%99%e6%98%af%e5%9b%a0%e4%b8%ba%e4%bb%80%e4%b9%88)
+  - [边框](#%e8%be%b9%e6%a1%86)
+  - [滚动overflow](#%e6%bb%9a%e5%8a%a8overflow)
+  - [文字折行](#%e6%96%87%e5%ad%97%e6%8a%98%e8%a1%8c)
+  - [装饰属性及其他](#%e8%a3%85%e9%a5%b0%e5%b1%9e%e6%80%a7%e5%8f%8a%e5%85%b6%e4%bb%96)
+  - [外边距折叠(collapsing margins)](#%e5%a4%96%e8%be%b9%e8%b7%9d%e6%8a%98%e5%8f%a0collapsing-margins)
+  - [CSS单位](#css%e5%8d%95%e4%bd%8d)
+  - [transform变形](#transform%e5%8f%98%e5%bd%a2)
+- [DOM层级顺序与z-index](#dom%e5%b1%82%e7%ba%a7%e9%a1%ba%e5%ba%8f%e4%b8%8ez-index)
+  - [link 与 @import 的区别](#link-%e4%b8%8e-import-%e7%9a%84%e5%8c%ba%e5%88%ab)
+  - [display 有哪些值？说明他们的作用](#display-%e6%9c%89%e5%93%aa%e4%ba%9b%e5%80%bc%e8%af%b4%e6%98%8e%e4%bb%96%e4%bb%ac%e7%9a%84%e4%bd%9c%e7%94%a8)
+  - [定位方式有几种？position 有哪些值？ relative 和 absolute 定位原点是？](#%e5%ae%9a%e4%bd%8d%e6%96%b9%e5%bc%8f%e6%9c%89%e5%87%a0%e7%a7%8dposition-%e6%9c%89%e5%93%aa%e4%ba%9b%e5%80%bc-relative-%e5%92%8c-absolute-%e5%ae%9a%e4%bd%8d%e5%8e%9f%e7%82%b9%e6%98%af)
+  - [为什么用translate来改变位置而不是通过position定位?](#%e4%b8%ba%e4%bb%80%e4%b9%88%e7%94%a8translate%e6%9d%a5%e6%94%b9%e5%8f%98%e4%bd%8d%e7%bd%ae%e8%80%8c%e4%b8%8d%e6%98%af%e9%80%9a%e8%bf%87position%e5%ae%9a%e4%bd%8d)
+  - [如何水平居中一个元素？](#%e5%a6%82%e4%bd%95%e6%b0%b4%e5%b9%b3%e5%b1%85%e4%b8%ad%e4%b8%80%e4%b8%aa%e5%85%83%e7%b4%a0)
+  - [用纯 CSS 创建一个三角形的原理是什么？](#%e7%94%a8%e7%ba%af-css-%e5%88%9b%e5%bb%ba%e4%b8%80%e4%b8%aa%e4%b8%89%e8%a7%92%e5%bd%a2%e7%9a%84%e5%8e%9f%e7%90%86%e6%98%af%e4%bb%80%e4%b9%88)
+  - [li 与 li 之间有看不见的空白间隔是什么原因引起的？有什么解决办法？(也称幽灵字符)](#li-%e4%b8%8e-li-%e4%b9%8b%e9%97%b4%e6%9c%89%e7%9c%8b%e4%b8%8d%e8%a7%81%e7%9a%84%e7%a9%ba%e7%99%bd%e9%97%b4%e9%9a%94%e6%98%af%e4%bb%80%e4%b9%88%e5%8e%9f%e5%9b%a0%e5%bc%95%e8%b5%b7%e7%9a%84%e6%9c%89%e4%bb%80%e4%b9%88%e8%a7%a3%e5%86%b3%e5%8a%9e%e6%b3%95%e4%b9%9f%e7%a7%b0%e5%b9%bd%e7%81%b5%e5%ad%97%e7%ac%a6)
+  - [display:inline-block 什么时候会显示间隙？(携程)](#displayinline-block-%e4%bb%80%e4%b9%88%e6%97%b6%e5%80%99%e4%bc%9a%e6%98%be%e7%a4%ba%e9%97%b4%e9%9a%99%e6%90%ba%e7%a8%8b)
+  - [什么是响应式设计？响应式设计的基本原理是什么？如何兼容低版本的 IE？](#%e4%bb%80%e4%b9%88%e6%98%af%e5%93%8d%e5%ba%94%e5%bc%8f%e8%ae%be%e8%ae%a1%e5%93%8d%e5%ba%94%e5%bc%8f%e8%ae%be%e8%ae%a1%e7%9a%84%e5%9f%ba%e6%9c%ac%e5%8e%9f%e7%90%86%e6%98%af%e4%bb%80%e4%b9%88%e5%a6%82%e4%bd%95%e5%85%bc%e5%ae%b9%e4%bd%8e%e7%89%88%e6%9c%ac%e7%9a%84-ie)
+  - [box-sizing 常用的属性有哪些？分别有什么作用？](#box-sizing-%e5%b8%b8%e7%94%a8%e7%9a%84%e5%b1%9e%e6%80%a7%e6%9c%89%e5%93%aa%e4%ba%9b%e5%88%86%e5%88%ab%e6%9c%89%e4%bb%80%e4%b9%88%e4%bd%9c%e7%94%a8)
+  - [单行文本溢出显示省略号](#%e5%8d%95%e8%a1%8c%e6%96%87%e6%9c%ac%e6%ba%a2%e5%87%ba%e6%98%be%e7%a4%ba%e7%9c%81%e7%95%a5%e5%8f%b7)
+  - [多行文本溢出显示省略号](#%e5%a4%9a%e8%a1%8c%e6%96%87%e6%9c%ac%e6%ba%a2%e5%87%ba%e6%98%be%e7%a4%ba%e7%9c%81%e7%95%a5%e5%8f%b7)
+  - [display: none; visibility: hidden; opacity: 0;的区别](#display-none-visibility-hidden-opacity-0%e7%9a%84%e5%8c%ba%e5%88%ab)
+  - [请列举几种隐藏元素的方法](#%e8%af%b7%e5%88%97%e4%b8%be%e5%87%a0%e7%a7%8d%e9%9a%90%e8%97%8f%e5%85%83%e7%b4%a0%e7%9a%84%e6%96%b9%e6%b3%95)
+  - [rgba() 和 opacity 的透明效果有什么不同？](#rgba-%e5%92%8c-opacity-%e7%9a%84%e9%80%8f%e6%98%8e%e6%95%88%e6%9e%9c%e6%9c%89%e4%bb%80%e4%b9%88%e4%b8%8d%e5%90%8c)
+  - [css 属性 content 有什么作用？](#css-%e5%b1%9e%e6%80%a7-content-%e6%9c%89%e4%bb%80%e4%b9%88%e4%bd%9c%e7%94%a8)
+  - [元素竖向的百分比设定是相对于容器的高度吗？](#%e5%85%83%e7%b4%a0%e7%ab%96%e5%90%91%e7%9a%84%e7%99%be%e5%88%86%e6%af%94%e8%ae%be%e5%ae%9a%e6%98%af%e7%9b%b8%e5%af%b9%e4%ba%8e%e5%ae%b9%e5%99%a8%e7%9a%84%e9%ab%98%e5%ba%a6%e5%90%97)
+  - [请解释 CSS sprites，以及你要如何在页面或网站中实现它](#%e8%af%b7%e8%a7%a3%e9%87%8a-css-sprites%e4%bb%a5%e5%8f%8a%e4%bd%a0%e8%a6%81%e5%a6%82%e4%bd%95%e5%9c%a8%e9%a1%b5%e9%9d%a2%e6%88%96%e7%bd%91%e7%ab%99%e4%b8%ad%e5%ae%9e%e7%8e%b0%e5%ae%83)
+  - [base64的使用](#base64%e7%9a%84%e4%bd%bf%e7%94%a8)
+  - [margin叠加几种情况](#margin%e5%8f%a0%e5%8a%a0%e5%87%a0%e7%a7%8d%e6%83%85%e5%86%b5)
+  - [媒体查询是什么](#%e5%aa%92%e4%bd%93%e6%9f%a5%e8%af%a2%e6%98%af%e4%bb%80%e4%b9%88)
+  - [媒体查询的使用](#%e5%aa%92%e4%bd%93%e6%9f%a5%e8%af%a2%e7%9a%84%e4%bd%bf%e7%94%a8)
 Cascading Style Sheet 层叠样式表
 
-### [CSS选择器](./CSS选择器.md)
+## [CSS选择器](./CSS选择器.md)
 
-
+## 盒模型
 ### 盒模型
 盒模型有两种， IE 怪异盒子模型、W3C标准盒子模型；
 
@@ -30,7 +90,7 @@ box-sizing: border-box;
 ```
 
 
-### BFC
+## BFC
 [什么是BFC](https://www.cnblogs.com/libin-1/p/7098468.html)
 
 W3C对BFC定义：
@@ -42,7 +102,7 @@ BFC(Block formatting context)直译为"块级格式化上下文"。
 并且与这个区域外部毫不相干。
 
 
-####如何生成BFC：
+### 如何生成BFC：
 （脱离文档流，满足下列的任意一个或多个条件即可）
 1. 根元素，即HTML元素（最大的一个BFC）
 2. float浮动：float值非none
@@ -50,7 +110,7 @@ BFC(Block formatting context)直译为"块级格式化上下文"。
 4. overflow的值不为visible（默认值。内容不会被修剪，会呈现在元素框之外）
 5. display的值为inline-block、table-cell、table-caption、网格布局、弹性布局
 
-####BFC布局规则：
+### BFC布局规则：
 1. 内部的Box会在垂直方向，一个接一个地放置。
 2. 属于同一个BFC的两个相邻的Box的margin会发生重叠：
  - Box垂直方向的距离由margin决定，在一个BFC中，两个相邻的块级盒子的垂直外边距会产生折叠。
@@ -60,7 +120,7 @@ BFC(Block formatting context)直译为"块级格式化上下文"。
 4. BFC的区域不会与float box重叠！！！
 5. 计算BFC的高度，浮动元素也参与计算！！！（避免父级元素高度塌陷）
 
-####BFC作用：
+### BFC作用：
 1. 利用BFC避免外边距折叠
 2. 清除内部浮动 （撑开高度）
    1. 原理: 触发父div的BFC属性，使下面的子div都处在父div的同一个BFC区域之内
@@ -80,21 +140,7 @@ BFC(Block formatting context)直译为"块级格式化上下文"。
 
 
 
-### 非布局样式
- - 字体、字重、颜色、大小、行高
- - 背景、边框
- - 滚动、换行
- - 粗体、斜体、下划线
- - 其他
-
-
-### 行高的构成
- - 行高是由 line-box 组成的
- - line-box 是由一行里的 inline-box 组成的
- - inline-box中最高的那个，或字体最大的拿个决定行高
-
-
-
+## float浮动
 ### float
  - 元素"浮动"
  - 脱离文档流
@@ -189,6 +235,7 @@ BFC(Block formatting context)直译为"块级格式化上下文"。
 span、字体修饰b/i、sup平方、图片img
 特征：①设置宽高无效②margin仅左右有效，上下无效；padding都有效，会撑大空间③不会自动换行
 
+## inline行内
 ### inline-block的间隙
 两个并列的inline-block中间会有一条裂缝，这个的原因是两个标签之间有空格，
 浏览器把这些空格当成文字中空格，所以这两个块中间多少有间隙。
@@ -215,8 +262,129 @@ span、字体修饰b/i、sup平方、图片img
 - 纯数字：会把比例传递给后代。例如，父级行高为 1.5，子元素字体为 18px，则子元素行高为 1.5 \* 18 = 27px
 - 百分比：将计算后的值传递给后代
 
+## 伪类伪元素
+### 伪元素和伪类、伪类和伪元素的区别和作用？
+
+伪元素:在内容元素的前后插入额外的元素或样式，但是这些元素实际上并不在文档中生成。
+它们只在外部显示可见，但不会在文档的源代码中找到它们，因此，称为“伪”元素。例如：
+
+```css
+p::before {content:"第一章：";}
+p::after {content:"Hot!";}
+p::first-line {background:red;}
+p::first-letter {font-size:30px;}
+```
+
+伪类: 将特殊的效果添加到特定选择器上。它是已有元素上添加类别的，不会产生新的元素。例如：
+
+```css
+a:hover {color: #FF00FF}
+p:first-child {color: red}
+```
 
 
+
+### ::before 和 :after 中双冒号和单冒号有什么区别？
+
+- 在 CSS 中伪类一直用 : 表示，如 :hover, :active 等
+- 伪元素在 CSS1 中已存在，当时语法是用 : 表示，如 :before 和 :after
+- 后来在 CSS3 中修订，伪元素用 :: 表示，如 ::before 和 ::after，以此区分伪元素和伪类
+- 由于低版本 IE 对双冒号不兼容，开发者为了兼容性各浏览器，继续使使用 :after 这种老语法表示伪元素
+- 综上所述：::before 是 CSS3 中写伪元素的新语法； :after 是 CSS1 中存在的、兼容 IE 的老语法
+
+### a 标签上四个伪类的使用顺序是怎么样的？
+
+link > visited > hover > active
+简称 lvha(love-ha)
+
+伪类的特殊性（应用优先级）是同样的，所以后出现的伪类会覆盖先出现的伪类（同时激活） 
+
+在这里，比如把hover放在active后面，那么实际你在激活（active）链接的时候就触发了hover伪类，hover在后面覆盖了active的颜色，所以始终无法看到active的颜色 
+
+
+## 性能
+### CSS Hack 兼容老旧浏览器
+在一部分不合法，但是在某些浏览器上生效的写法就叫CSS Hack，
+一般用来兼容老的浏览器， 缺点是难理解、难维护、易失效
+
+替代方案： 
+ - 特征检测
+ - 针对性的加class
+   - 比如第一步检测是IE6，那么只需要添加一个专门的 class 名来兼容IE6就好
+
+写Hack时需要注意
+ - 标准属性写在前面， hack代码写在后面
+
+### CSS 优化、提高性能的方法有哪些？
+- 多个 css 合并，尽量减少 HTTP 请求
+- css 雪碧图sprite
+- 抽象提取公共样式，减少代码量
+- 选择器优化嵌套，尽量避免层级过深 （用‘>’替换‘ ’）
+- 属性值为 0 时，不加单位
+- 压缩CSS代码
+- 避免使用 [CSS 表达式](http://www.divcss5.com/css3-style/c50224.shtml)
+  - 它们要计算成千上万次并且可能会对你页面的性能产生影响。
+  
+
+ 
+
+### CSS预处理器
+ - 嵌套           
+   - 反映层级和约束
+ - 变量和计算      
+   - 减少冗余代码
+ - entend和mixin  
+   - 代码片段重用
+   - mixin是直接把CSS代码每个地方重复写一份
+   - extend是使用逗号分割的选择器来为多个不同的地方使用同一段CSS
+ - 循环          
+   -  适用于复杂有规律的样式
+ - import        
+   -  CSS模块化
+
+
+###  CSS3新特性？
+
+- 新增选择器 p:nth-child(n){color: rgba(255, 0, 0, 0.75)}
+- 弹性盒模型 display: flex;
+- 多列布局 column-count: 5;
+- 媒体查询 @media (max-width: 480px) {.box: {column-count: 1;}}
+- 个性化字体 @font-face{font-family: BorderWeb; src:url(BORDERW0.eot);}
+- 颜色透明度 color: rgba(255, 0, 0, 0.75);
+- 圆角 border-radius: 5px;
+- 渐变 background:linear-gradient(red, green, blue);
+- 阴影 box-shadow:3px 3px 3px rgba(0, 64, 128, 0.3);
+- 倒影 box-reflect: below 2px;
+- 文字装饰 text-stroke-color: red;
+- 文字溢出 text-overflow:ellipsis;
+- 背景效果 background-size: 100px 100px;
+- 边框效果 border-image:url(bt_blue.png) 0 10;
+- 平滑过渡 transition: all .3s ease-in .1s;
+- 动画 @keyframes anim-1 {50% {border-radius: 50%;}} animation: anim-1 1s;
+- 变形 transform
+  - 旋转 transform: rotate(20deg);
+  - 倾斜 transform: skew(150deg, -10deg);
+  - 位移 transform: translate(20px, 20px);
+  - 缩放 transform: scale(.5);
+
+
+
+## 其他
+
+### 非布局样式
+ - 字体、字重、颜色、大小、行高
+ - 背景、边框
+ - 滚动、换行
+ - 粗体、斜体、下划线
+ - 其他
+
+
+### 行高的构成
+ - 行高是由 line-box 组成的
+ - line-box 是由一行里的 inline-box 组成的
+ - inline-box中最高的那个，或字体最大的拿个决定行高
+
+  
 ### 图片下面有一个缝隙是因为什么
 ![fenxi](../img/imgbottom.png)
 
@@ -256,19 +424,6 @@ span、字体修饰b/i、sup平方、图片img
  - 下划线   text-decoration
  - 指针  cursor
 
-
-
-### CSS Hack 兼容老旧浏览器
-在一部分不合法，但是在某些浏览器上生效的写法就叫CSS Hack，
-一般用来兼容老的浏览器， 缺点是难理解、难维护、易失效
-
-替代方案： 
- - 特征检测
- - 针对性的加class
-   - 比如第一步检测是IE6，那么只需要添加一个专门的 class 名来兼容IE6就好
-
-写Hack时需要注意
- - 标准属性写在前面， hack代码写在后面
 
 
 
@@ -347,33 +502,10 @@ span、字体修饰b/i、sup平方、图片img
  - skewY(angle)
  - perspective(n)	
    - 为 3D 转换元素定义透视视图。
- 
-
-### CSS预处理器
- - 嵌套           
-   - 反映层级和约束
- - 变量和计算      
-   - 减少冗余代码
- - entend和mixin  
-   - 代码片段重用
-   - mixin是直接把CSS代码每个地方重复写一份
-   - extend是使用逗号分割的选择器来为多个不同的地方使用同一段CSS
- - 循环          
-   -  适用于复杂有规律的样式
- - import        
-   -  CSS模块化
 
 
 
-### CSS 优化、提高性能的方法有哪些？
-- 多个 css 合并，尽量减少 HTTP 请求
-- css 雪碧图sprite
-- 抽象提取公共样式，减少代码量
-- 选择器优化嵌套，尽量避免层级过深 （用‘>’替换‘ ’）
-- 属性值为 0 时，不加单位
-- 压缩CSS代码
-- 避免使用 [CSS 表达式](http://www.divcss5.com/css3-style/c50224.shtml)
-  - 它们要计算成千上万次并且可能会对你页面的性能产生影响。
+
 
 
 
@@ -389,25 +521,6 @@ span、字体修饰b/i、sup平方、图片img
 - @import 必须在样式规则之前，可以在 css 文件中引用其他文件
 - 总体来说：link 优于@import
 
-
-
-### CSS 有哪些继承属性
-
-- 关于文字排版的属性如：
-  - font
-  - word-break
-  - letter-spacing
-  - text-align
-  - text-rendering
-  - word-spacing
-  - white-space
-  - text-indent
-  - text-transform
-  - text-shadow
-- line-height
-- color
-- visibility
-- cursor
 
 
 
@@ -433,32 +546,9 @@ span、字体修饰b/i、sup平方、图片img
 - sticky 粘性定位，接近于relative和fixed的结合体，顶屁股
 
 
-###  CSS3新特性？
-
-- 新增选择器 p:nth-child(n){color: rgba(255, 0, 0, 0.75)}
-- 弹性盒模型 display: flex;
-- 多列布局 column-count: 5;
-- 媒体查询 @media (max-width: 480px) {.box: {column-count: 1;}}
-- 个性化字体 @font-face{font-family: BorderWeb; src:url(BORDERW0.eot);}
-- 颜色透明度 color: rgba(255, 0, 0, 0.75);
-- 圆角 border-radius: 5px;
-- 渐变 background:linear-gradient(red, green, blue);
-- 阴影 box-shadow:3px 3px 3px rgba(0, 64, 128, 0.3);
-- 倒影 box-reflect: below 2px;
-- 文字装饰 text-stroke-color: red;
-- 文字溢出 text-overflow:ellipsis;
-- 背景效果 background-size: 100px 100px;
-- 边框效果 border-image:url(bt_blue.png) 0 10;
-- 平滑过渡 transition: all .3s ease-in .1s;
-- 动画 @keyframes anim-1 {50% {border-radius: 50%;}} animation: anim-1 1s;
-- 变形 transform
-  - 旋转 transform: rotate(20deg);
-  - 倾斜 transform: skew(150deg, -10deg);
-  - 位移 transform: translate(20px, 20px);
-  - 缩放 transform: scale(.5);
 
 
-###为什么用translate来改变位置而不是通过position定位?
+### 为什么用translate来改变位置而不是通过position定位?
 - translate()是transform的一个值。
 - 改变transform或opacity不会触发浏览器重排重绘，只会触发复合；而改变绝对定位会触发重排重绘
 - transform使浏览器为元素创建一个 GPU 图层，但改变绝对定位会使用到 CPU。因此前者更高效
@@ -599,46 +689,6 @@ content 属性专门应用在 before/after 伪元素上，用于插入额外内�
 
 
 
-
-### a 标签上四个伪类的使用顺序是怎么样的？
-
-link > visited > hover > active
-简称 lvha(love-ha)
-
-伪类的特殊性（应用优先级）是同样的，所以后出现的伪类会覆盖先出现的伪类（同时激活） 
-
-在这里，比如把hover放在active后面，那么实际你在激活（active）链接的时候就触发了hover伪类，hover在后面覆盖了active的颜色，所以始终无法看到active的颜色 
-
-
-
-### 伪元素和伪类、伪类和伪元素的区别和作用？
-
-伪元素:在内容元素的前后插入额外的元素或样式，但是这些元素实际上并不在文档中生成。
-它们只在外部显示可见，但不会在文档的源代码中找到它们，因此，称为“伪”元素。例如：
-
-```css
-p::before {content:"第一章：";}
-p::after {content:"Hot!";}
-p::first-line {background:red;}
-p::first-letter {font-size:30px;}
-```
-
-伪类: 将特殊的效果添加到特定选择器上。它是已有元素上添加类别的，不会产生新的元素。例如：
-
-```css
-a:hover {color: #FF00FF}
-p:first-child {color: red}
-```
-
-
-
-### ::before 和 :after 中双冒号和单冒号有什么区别？
-
-- 在 CSS 中伪类一直用 : 表示，如 :hover, :active 等
-- 伪元素在 CSS1 中已存在，当时语法是用 : 表示，如 :before 和 :after
-- 后来在 CSS3 中修订，伪元素用 :: 表示，如 ::before 和 ::after，以此区分伪元素和伪类
-- 由于低版本 IE 对双冒号不兼容，开发者为了兼容性各浏览器，继续使使用 :after 这种老语法表示伪元素
-- 综上所述：::before 是 CSS3 中写伪元素的新语法； :after 是 CSS1 中存在的、兼容 IE 的老语法
 
 
 
