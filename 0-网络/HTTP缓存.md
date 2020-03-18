@@ -1,8 +1,45 @@
-# 缓存
+- [缓存](#缓存)
+  - [缓存的优点](#缓存的优点)
+  - [缓存过程分析](#缓存过程分析)
+  - [缓存位置](#缓存位置)
+    - [service worker ？](#service-worker-)
+    - [memory cache](#memory-cache)
+    - [disk cache](#disk-cache)
+  - [浏览器行为：打开网页、刷新网页](#浏览器行为打开网页刷新网页)
+- [HTTP缓存](#http缓存)
+  - [强制缓存](#强制缓存)
+    - [Expires（HTTP1.1已弃用）](#expireshttp11已弃用)
+    - [Cache-Control（disk & memory cache）](#cache-controldisk--memory-cache)
+  - [协商缓存](#协商缓存)
+    - [Last-Modified / If-Modified-Since](#last-modified--if-modified-since)
+    - [Etag / If-None-Match（优先级更高）](#etag--if-none-match优先级更高)
+  - [比较强制缓存和协商缓存](#比较强制缓存和协商缓存)
+- [浏览器缓存](#浏览器缓存)
+  
 参考链接：https://juejin.im/entry/5ad86c16f265da505a77dca4
-
+## 缓存
+### 缓存的优点
+1. 减少冗余数据的传输
+2. 节省网络数据
+3. 降低对服务器的要求，更快响应
+4. 降低距离延迟
+   
 ### 缓存过程分析
-浏览器与服务器通信的方式为应答模式，即是：浏览器发起HTTP请求 – 服务器响应该请求。那么浏览器第一次向服务器发起该请求后拿到请求结果，会根据响应报文中HTTP头的缓存标识，决定是否缓存结果，是则将请求结果和缓存标识存入浏览器缓存中，简单的过程如下图：
+第一次请求：<br>
+1. 本地无缓存
+2. 向服务器发请求
+3. 获取服务器资源，协商缓存（是否缓存，获取资源的Expires、Cache-Control、Etag、Last-Modified等信息）
+4. 呈现页面
+
+再次请求：<br>
+1. 获取资源header信息
+2. 判断是否命中强制缓存(cache-control和expires信息)
+   - 是，则返回缓存，不与服务器通信；
+   - 否，则发送请求并携带协商缓存信息（Last-Modified/If-Modified-Since和Etag/If-None-Match）
+3. 服务器判断是否命中协商缓存
+   - 是，则返回新的响应头且不返回资源，浏览器从缓存中获取；
+   - 否，则返回更新资源
+
 
 ![](../img/http-cache.png)
 
@@ -13,6 +50,26 @@
  - 浏览器每次拿到返回的请求结果都会将该结果和缓存标识存入浏览器缓存中
 
 以上两点结论就是浏览器缓存机制的关键，他确保了每个请求的缓存存入与读取，只要我们再理解浏览器缓存的使用规则，那么所有的问题就迎刃而解了，本文也将围绕着这点进行详细分析。为了方便大家理解，这里我们根据是否需要向服务器重新发起HTTP请求将缓存过程分为两个部分，分别是强制缓存和协商缓存。
+
+
+### 缓存位置
+ 从前往后找：Service Worker ， Memory Cache ，Disk Cache
+ #### service worker ？
+ - 用户自定义缓存哪些资源到硬盘上
+ - 开发者工具 -> Application -> Cache Storage 
+ #### memory cache
+ - 内存，几乎所有的网络请求资源都会被浏览器自动加入到memory cache中<br>
+ - 关闭浏览器窗口即失效，浏览器忽略max-age=0，no-cache等头部。但no-store则不存入。
+#### disk cache
+- 硬盘，持久存储，允许相同资源的跨会话、跨站点使用
+- 严格根据HTTP头部缓存资源
+- 大多数缓存来自于disk cache
+
+### 浏览器行为：打开网页、刷新网页
+- 打开网页：是否命中强缓存；是否命中协商缓存；返回数据
+- 普通刷新F5：相当于max-age = 0，让缓存立即过期，直接协商缓存
+- 强制刷新Ctrl + F5：不使用缓存，Cache-control: no-cache，服务器直接返回最新内容
+## HTTP缓存
 
 ### 强制缓存
 强制缓存就是向浏览器缓存查找该请求结果，并根据该结果的缓存规则来决定是否使用该缓存结果的过程，强制缓存的情况主要有三种(暂不分析协商缓存过程)，如下：
@@ -33,14 +90,14 @@
 
 当浏览器向服务器发起请求时，服务器会将缓存规则放入HTTP响应报文的HTTP头中和请求结果一起返回给浏览器，控制强制缓存的字段分别是Expires和Cache-Control，其中Cache-Control优先级比Expires高。
 
-### Expires
+#### Expires（HTTP1.1已弃用）
 Expires是HTTP/1.0控制网页缓存的字段，其值为服务器返回该请求结果缓存的到期时间，即再次发起该请求时，如果客户端的时间小于Expires的值时，直接使用缓存结果。
 
 > Expires是HTTP/1.0的字段，但是现在浏览器默认使用的是HTTP/1.1，那么在HTTP/1.1中网页缓存还是否由Expires控制？
 
 到了HTTP/1.1，Expire已经被Cache-Control替代，原因在于Expires控制缓存的原理是使用客户端的时间与服务端返回的时间做对比，那么如果客户端与服务端的时间因为某些原因（例如时区不同；客户端和服务端有一方的时间不准确）发生误差，那么强制缓存则会直接失效，这样的话强制缓存的存在则毫无意义，那么Cache-Control又是如何控制的呢？
 
-### Cache-Control
+#### Cache-Control（disk & memory cache）
 在HTTP/1.1中，Cache-Control是最重要的规则，主要用于控制网页缓存，主要取值为：
 
  - public：所有内容都将被缓存（客户端和代理服务器都可缓存）
@@ -123,7 +180,7 @@ from memory cache代表使用内存中的缓存，from disk cache则代表使用
 
 同样，协商缓存的标识也是在响应报文的HTTP头中和请求结果一起返回给浏览器的，控制协商缓存的字段分别有：Last-Modified / If-Modified-Since和Etag / If-None-Match，其中Etag / If-None-Match的优先级比Last-Modified / If-Modified-Since高。
 
-### Last-Modified / If-Modified-Since
+#### Last-Modified / If-Modified-Since
 Last-Modified是服务器响应请求时，返回该资源文件在服务器最后被修改的时间，如下。
 
 ![](../img/cache-lastmodify.png)
@@ -132,7 +189,7 @@ If-Modified-Since则是客户端再次发起该请求时，携带上次请求返
 
 ![](../img/if-modified-since.png)
 
-### Etag / If-None-Match
+#### Etag / If-None-Match（优先级更高）
 Etag是服务器响应请求时，返回当前资源文件的一个唯一标识(由服务器生成)，如下。
 
 ![](../img/etag.png)
@@ -143,7 +200,10 @@ If-None-Match是客户端再次发起该请求时，携带上次请求返回的�
 
 注：Etag / If-None-Match优先级高于Last-Modified / If-Modified-Since，同时存在则只有Etag / If-None-Match生效。
 
-### 总结
+### 比较强制缓存和协商缓存
 强制缓存优先于协商缓存进行，若强制缓存(Expires和Cache-Control)生效则直接使用缓存，若不生效则进行协商缓存(Last-Modified / If-Modified-Since和Etag / If-None-Match)，协商缓存由服务器决定是否使用缓存，若协商缓存失效，那么代表该请求的缓存失效，重新获取请求结果，再存入浏览器缓存中；生效则返回304，继续使用缓存，主要过程如下：
 
 ![](../img/cache-all.png)
+
+
+## [浏览器缓存](./../0-HTML&浏览器/浏览器缓存.md)

@@ -1,3 +1,7 @@
+- [CDN](#cdn)
+  - [加速原理](#加速原理)
+    - [CDN节点有缓存场景](#cdn节点有缓存场景)
+    - [CDN节点无缓存场景](#cdn节点无缓存场景)
 # CDN
 CDN（Content Delivery Network，内容分发网络）是构建在现有互联网基础之上的一层智能虚拟网络，通过在网络各处部署节点服务器，实现将源站内容分发至所有CDN节点，使用户可以就近获得所需的内容。CDN服务缩短了用户查看内容的访问延迟，提高了用户访问网站的响应速度与网站的可用性，解决了网络带宽小、用户访问量大、网点分布不均等问题。
 
@@ -11,7 +15,7 @@ CDN（Content Delivery Network，内容分发网络）是构建在现有互联�
 
 1. 用户在浏览器输入要访问的网站域名，向本地DNS发起域名解析请求。
 2. 域名解析的请求被发往网站授权DNS服务器。
-3. 网站DNS服务器解析发现域名已经CNAME到了www.example.com.c.cdnhwc1.com。
+3. 网站DNS服务器解析发现域名已经CNAME到了`www.example.com.c.cdnhwc1.com`。
 4. 请求被指向CDN服务。
 5. CDN对域名进行智能解析，将响应速度最快的CDN节点IP地址返回给本地DNS。
 6. 用户获取响应速度最快的CDN节点IP地址。
@@ -25,7 +29,7 @@ CDN（Content Delivery Network，内容分发网络）是构建在现有互联�
 
 1. 用户在浏览器输入要访问的网站域名，向本地DNS发起域名解析请求。
 2. 域名解析的请求被发往网站授权DNS服务器。
-3. 网站DNS服务器解析发现域名已经CNAME到了www.example.com.c.cdnhwc1.com。
+3. 网站DNS服务器解析发现域名已经CNAME到了`www.example.com.c.cdnhwc1.com`。
 4. 请求被指向CDN服务。
 5. CDN对域名进行智能解析，将响应速度最快的CDN节点IP地址返回给本地DNS。
 6. 用户获取响应速度最快的CDN节点IP地址。
